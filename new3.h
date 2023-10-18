@@ -3,13 +3,36 @@
 using namespace sf;
 using namespace std;
 
+class Escenario{
+	public:
+		void setStatusE(bool status_){
+			status = status_;
+		}
+
+		bool give_jer(Boxeador Objetivo){
+			if (!status){
+				Objetivo.setStatus(false);
+				setStatusE(true);
+			}else{
+				Objetivo.setStatus(true);
+				setStatusE(false);
+			}
+		}
+	private: 
+		bool status = true;
+        Clock reloj;
+}
+
+
+
 class Boxeador
 {
 public:
-	Boxeador(string _nombre, int _vida, int _energia) :
+	Boxeador(string _nombre, int _vida, int _energia, bool _bot{false}) :
 		nombre { _nombre },
 		vida { _vida },
-		energia { _energia }
+		energia { _energia },
+        bot{_bot}
 	{
 		if (_vida <= 0)
 			vida = 100;
@@ -25,15 +48,22 @@ public:
 	{
 		return energia;
 	}
-	string getStatus()
+	bool setStatus(bool status_)
+	{
+		status = status_;
+	}
+	bool getStatus()
 	{
 		return status;
 	}
 
+	void Interact(Boxeador Enemigo)
+
 private:
 	string nombre;
 	int vida, energia;
-	string status;
+	bool status;
+    bool bot;
 	//status: neutro (0), atacando(1), bloqueando(2), esquivando(3), b&a(4), b&e(5)
 };
 
@@ -42,7 +72,8 @@ class Game
 public:
 	Game() :
 		mWindow(VideoMode(640, 480), "SFML Application"),
-		jugador("Gabriel", 100, 100)
+		jugador("Gabriel", 100, 100),
+
 	{}
 
 	void run()
@@ -85,6 +116,7 @@ public:
 		{
 			if (der && block)
 			{
+				
 				cout << "Golpe Derecha con bloqueo" << endl;
 			}
 			else if (izq && block)
@@ -200,4 +232,6 @@ private:
 	bool dodge = false;
 	bool izq, der, up, back;
 	Boxeador jugador;
+    Boxeador enemigo; 
+	Escenario escenario;
 };
