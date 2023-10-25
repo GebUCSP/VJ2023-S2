@@ -11,13 +11,14 @@ public:
     Game() :
             mWindow(VideoMode(640, 480), "SFML Application"),
             jugador("Gabriel", 100, 100),
-            enemigo("Neymi",100,100)
+            enemigo(&jugador,"Neymi",100,100)
     {}
 
     void run()
     {
         while (mWindow.isOpen())
         {
+            enemigo.timer();
             processEvents();
             update();
             render();
@@ -29,62 +30,61 @@ public:
         //ACCIONES MANTENIBLES
         if (key == Keyboard::K)
         {
-            block = isPressed;
+            jugador.block = isPressed;
         }
 
         if (key == Keyboard::A)
         {
             cout << "Ubicacion es izquierda" << endl;
-            izq = isPressed;
+            jugador.izq = isPressed;
         }
         else if (key == Keyboard::D)
         {
             cout << "Ubicacion es derecha" << endl;
-            der = isPressed;
+            jugador.der = isPressed;
         }
         else if (key == Keyboard::S)
         {
             cout << "Ubicacion es atras" << endl;
-            back = isPressed;
+            jugador.back = isPressed;
         }
 
         //ATTACK
         if (isPressed) {
             if (key == Keyboard::J) {
-                jugador.setStatus("attack");
                 if (enemigo.getRange()) {
                     jugador.setVida(jugador.getVida() - 10);
                 } else {
                     enemigo.setVida(enemigo.getVida() - 10);
                 }
                 /*
-                if (der && block)
+                if (jugador.der && jugador.block)
                 {
                     cout << "Golpe Derecha con bloqueo" << endl;
                 }
-                else if (izq && block)
+                else if (jugador.izq && jugador.block)
                 {
                     cout << "Golpe Izquierda con bloqueo" << endl;
                 }
                  */
-                if (der) {
+                if (jugador.der) {
                     cout << "Atacando der" << endl;
-                } else if (back) {
+                } else if (jugador.back) {
                     cout << "Atacando atras" << endl;
-                } else if (izq) {
+                } else if (jugador.izq) {
                     cout << "Atacando izq" << endl;
                 } else {
                     cout << "Atacando" << endl;
                 }
             }
 
-            //BLOCK
+            //jugador.block
             if (key == Keyboard::K) {
-                if (der) {
+                if (jugador.der) {
                     cout << "Bloqueando der" << endl;
-                } else if (izq) {
+                } else if (jugador.izq) {
                     cout << "Bloqueando izq" << endl;
-                } else if (back) {
+                } else if (jugador.back) {
                     cout << "Parry !!" << endl;
                 } else {
                     cout << "Bloqueando" << endl;
@@ -93,34 +93,32 @@ public:
             //DODGE
             if (key == Keyboard::L) {
                 /*
-                if (der && block)
+                if (jugador.der && jugador.block)
                 {
-                    cout << "Esquivando bloqueando der" << endl;
+                    cout << "Esquivando bloqueando jugador.der" << endl;
                 }
-                else if (izq && block)
+                else if (jugador.izq && jugador.block)
                 {
-                    cout << "Esquivando bloqueando izq" << endl;
+                    cout << "Esquivando bloqueando jugador.izq" << endl;
                 }
                  */
-                if (back) {
+                if (jugador.back) {
                     cout << "Esquivando atras" << endl;
-                } else if (der) {
+                } else if (jugador.der) {
                     cout << "Esquivando der" << endl;
-                } else if (izq) {
+                } else if (jugador.izq) {
                     cout << "Esquivando izq" << endl;
                 }
             }
-        } else{
-            jugador.setStatus("neutro");
         }
-        
+
+
         cout << "Vida: " << jugador.getVida() << endl;
         cout << "Energia: " << jugador.getEnergia() << endl;
-        cout << "Status: " << jugador.getStatus() << endl;
         cout << "isPressed: " << isPressed << endl;
         cout << endl;
 
-        //cout << "Izquierda: " << izq << " Derecha: " << der << " Arriba: " << up << " Atras: " << back << endl;
+        //cout << "Izquierda: " << jugador.izq << " Derecha: " << jugador.der << " Arriba: " << up << " Atras: " << jugador.back << endl;
     }
 
     void processEvents()
@@ -157,11 +155,8 @@ public:
 private:
     RenderWindow mWindow;
     CircleShape mPlayer;
-    //mover a clase boxer
-    bool block = false;
-    bool attack = false;
-    bool dodge = false;
-    bool izq=false, der=false, up=false, back=false;
+
+
     Boxeador jugador;
     Bot enemigo;
 };

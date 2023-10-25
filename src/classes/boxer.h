@@ -29,10 +29,6 @@ public:
     {
         return energia;
     }
-    string getStatus()
-    {
-        return status;
-    }
 
     void setVida(int newVida)
     {
@@ -44,22 +40,22 @@ public:
         energia = newEnergia;
     }
 
-    void setStatus(string newStatus)
-    {
-        status = newStatus;
+
+    bool getRange(){
+        return range;
     }
 
 
-protected:
-    /*
     bool block = false;
+    bool range = false;
     bool attack = false;
     bool dodge = false;
     bool izq=false, der=false, up=false, back=false;
-     */
+
+protected:
+
     string nombre;
     int vida, energia;
-    string status;
     //status: neutro (0), atacando(1), bloqueando(2), esquivando(3), b&a(4), b&e(5)
 };
 
