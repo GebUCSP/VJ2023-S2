@@ -1,5 +1,4 @@
-
-#include "new3.h"
+#include "classes/juego.h"
 #include <SFML/Graphics.hpp>
 
 using namespace std;
