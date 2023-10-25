@@ -51,6 +51,12 @@ public:
 
 
 protected:
+    /*
+    bool block = false;
+    bool attack = false;
+    bool dodge = false;
+    bool izq=false, der=false, up=false, back=false;
+     */
     string nombre;
     int vida, energia;
     string status;

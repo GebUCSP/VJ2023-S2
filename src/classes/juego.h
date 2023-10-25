@@ -51,6 +51,7 @@ public:
         //ATTACK
         if (isPressed) {
             if (key == Keyboard::J) {
+                jugador.setStatus("attack");
                 if (enemigo.getRange()) {
                     jugador.setVida(jugador.getVida() - 10);
                 } else {
@@ -109,10 +110,13 @@ public:
                     cout << "Esquivando izq" << endl;
                 }
             }
+        } else{
+            jugador.setStatus("neutro");
         }
+        
         cout << "Vida: " << jugador.getVida() << endl;
         cout << "Energia: " << jugador.getEnergia() << endl;
-        cout << "Vida: " << jugador.getStatus() << endl;
+        cout << "Status: " << jugador.getStatus() << endl;
         cout << "isPressed: " << isPressed << endl;
         cout << endl;
 
@@ -153,6 +157,7 @@ public:
 private:
     RenderWindow mWindow;
     CircleShape mPlayer;
+    //mover a clase boxer
     bool block = false;
     bool attack = false;
     bool dodge = false;
