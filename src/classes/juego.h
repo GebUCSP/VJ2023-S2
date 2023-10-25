@@ -10,8 +10,8 @@ class Game
 public:
     Game() :
             mWindow(VideoMode(640, 480), "SFML Application"),
-            jugador("Gabriel", 100, 100),
-            enemigo(&jugador,"Neymi",100,100)
+            jugador("Gabriel", 100, 100, 10),
+            enemigo(&jugador,"Neymi",100,100, 10, 10)
     {}
 
     void run()
@@ -52,11 +52,6 @@ public:
         //ATTACK
         if (isPressed) {
             if (key == Keyboard::J) {
-                if (enemigo.getRange()) {
-                    jugador.setVida(jugador.getVida() - 10);
-                } else {
-                    enemigo.setVida(enemigo.getVida() - 10);
-                }
                 /*
                 if (jugador.der && jugador.block)
                 {
@@ -117,6 +112,8 @@ public:
         cout << "Energia: " << jugador.getEnergia() << endl;
         cout << "isPressed: " << isPressed << endl;
         cout << endl;
+
+
 
         //cout << "Izquierda: " << jugador.izq << " Derecha: " << jugador.der << " Arriba: " << up << " Atras: " << jugador.back << endl;
     }

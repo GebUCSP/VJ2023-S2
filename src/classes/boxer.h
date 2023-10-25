@@ -10,10 +10,12 @@ using namespace std;
 class Boxeador
 {
 public:
-    Boxeador(string _nombre, int _vida, int _energia) :
+    Boxeador(string _nombre, int _vida, int _energia,int _cd = 1.0, int _dmg = 10) :
             nombre { _nombre },
             vida { _vida },
-            energia { _energia }
+            energia { _energia },
+            tcd {_cd},
+            dmg {_dmg}
     {
         if (_vida <= 0)
             vida = 100;
@@ -46,8 +48,13 @@ public:
     }
 
 
+    void setRange(bool newRange){
+        range = newRange;
+    }
+
+
+    int dmg;
     bool block = false;
-    bool range = false;
     bool attack = false;
     bool dodge = false;
     bool izq=false, der=false, up=false, back=false;
@@ -55,7 +62,8 @@ public:
 protected:
 
     string nombre;
-    int vida, energia;
+    int vida, energia, tcd;
+    bool range = false;
     //status: neutro (0), atacando(1), bloqueando(2), esquivando(3), b&a(4), b&e(5)
 };
 
