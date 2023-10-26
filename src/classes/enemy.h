@@ -11,7 +11,7 @@ public:
     Bot(Boxeador* _objetivo, string _nombre, int _vida, int _energia,int _cd, int _dmg, int _fataque = 2.0, int _fesquive = 3.0):
     objetivo(_objetivo),
     fataque{_fataque},
-    fbloqueo{_fataque - 1},
+    fbloqueo{(_fataque - 1)/2},
     fesquive{_fesquive},
     Boxeador(_nombre,_vida,_energia, _cd, _dmg)
     {
@@ -29,16 +29,18 @@ public:
 
     void timer(){
         ultimaAccion = clock.getElapsedTime().asSeconds();
-        if(ultimaAccion > fbloqueo){
-            cout << ultimaAccion << "\t" << fataque/fbloqueo;
-            cout << "Enemigo bloqueando: " << block << endl;
-            block = false;
-        }
+
         if(ultimaAccion > fataque){
             accionRandom(random());
             clock.restart();
         }
-
+        if(ultimaAccion > fbloqueo ){
+            cout << "Enemigo bloqueando " << endl;
+            block = true;
+        }else{
+            cout << "guardia baja" << endl;
+            block = false;
+        }
     }
 
     void accionRandom(int num){
@@ -62,7 +64,6 @@ public:
         }else{
             cout << "ataque bloquedo" << endl;
         }
-        tcd = clock.getElapsedTime().asSeconds();
         //cooldown en progreso
 
     }
