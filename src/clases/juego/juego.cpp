@@ -1,6 +1,9 @@
 #include "juego.h"
 
+//detecta los controles del jugador
 void Juego::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
+
+    //estos son los controles mantenibles, para crear combinaciones de movimientos
     if (key == sf::Keyboard::K)
     {
         jugador.states[1] = isPressed;
@@ -22,6 +25,7 @@ void Juego::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
         jugador.directions[2] = isPressed;
     }
 
+    //Botones presionables y no mantenibles
     //ATTACK
     if (isPressed) {
         if (key == sf::Keyboard::J) {
@@ -46,7 +50,7 @@ void Juego::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
             }
         }
 
-        //jugador.states[1]
+        //BLOQUEANDO
         if (key == sf::Keyboard::K) {
             if (jugador.directions[1]) {
                 std::cout << "Bloqueando der" << std::endl;
@@ -80,25 +84,31 @@ void Juego::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
         }
     }
 
-
+    // Monitoreo en consola (Hasta que se dibuje el videojuego en la pantalla)
     std::cout << "Vida: " << jugador.vida << std::endl;
     std::cout << "Energia: " << jugador.energia << std::endl;
     std::cout << "isPressed: " << isPressed << std::endl;
     std::cout << std::endl;
 }
 
+//Bucle procesador de eventos
 void Juego::processEvents() {
     sf::Event event;
+    //Bucle de events detectados
     while (mWindow.pollEvent(event))
     {
+        //comparador de tipos de eventos
         switch (event.type)
         {
+                //evento boton presionado
             case sf::Event::KeyPressed:
                 handlePlayerInput(event.key.code, true);
                 break;
+                //evento boton levantado
             case sf::Event::KeyReleased:
                 handlePlayerInput(event.key.code, false);
                 break;
+                //evento ventana cerrada
             case sf::Event::Closed:
                 mWindow.close();
                 break;
@@ -108,15 +118,19 @@ void Juego::processEvents() {
     }
 }
 
+//Actualizacion de pantalla
 void Juego::update() {}
 
+//renderizado en pantalla
 void Juego::render() {
     mWindow.clear();
     mWindow.display();
 }
 
+//contructor de clase Juego que inicia la pantalla el jugador y el enemigo
 Juego::Juego(): mWindow(sf::VideoMode(640, 480), "SFML Application"),jugador("Gabriel", 100, 100, 10), enemigo(&jugador, "Neymi", 100, 100, 10, 10,1){}
 
+//bucle principal del juego encargado de todos los procesos
 void Juego::run()
 {
     while (mWindow.isOpen())

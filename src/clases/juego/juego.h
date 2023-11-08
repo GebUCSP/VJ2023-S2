@@ -9,12 +9,19 @@
 class Juego
 {
 private:
+    //ventana del juego
     sf::RenderWindow mWindow;
+
+    //pruebas de dibujo del jugador (OMITIR)
     sf::CircleShape mPlayer;
 
+    //Enemigo
     Enemigo enemigo;
+
+    //Jugador
     Boxeador jugador;
 public:
+
     Juego();
     void run();
     void handlePlayerInput(sf::Keyboard::Key, bool);
