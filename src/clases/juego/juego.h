@@ -5,6 +5,7 @@
 #include "SFML/Graphics.hpp"
 #include "../boxeador/Boxeador.h"
 #include "../enemy/enemy.h"
+#include "../menu/menu.h"
 
 class Juego
 {
@@ -14,6 +15,10 @@ private:
 
     //pruebas de dibujo del jugador (OMITIR)
     sf::CircleShape mPlayer;
+
+    //Menú
+
+    Menu menu;
 
     //Enemigo
     Enemigo enemigo;
