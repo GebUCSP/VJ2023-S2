@@ -15,7 +15,8 @@ add_executable(CMakeSFMLProject src/main.cpp
         src/clases/juego/juego.h
         src/clases/juego/juego.cpp
         src/clases/enemy/enemy.h
-        src/clases/enemy/enemy.cpp)
+        src/clases/enemy/enemy.cpp
+        src/clases/menu/menu.h)
 target_link_libraries(CMakeSFMLProject PRIVATE sfml-graphics)
 target_compile_features(CMakeSFMLProject PRIVATE cxx_std_17)
 

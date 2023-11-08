@@ -115,11 +115,15 @@ void Juego::update() {}
 //renderizado en pantalla
 void Juego::render() {
     mWindow.clear();
+
+    menu.dibujarFondo();
+
     mWindow.display();
 }
 
 //contructor de clase Juego que inicia la pantalla el jugador y el enemigo
-Juego::Juego(): mWindow(sf::VideoMode(640, 480), "SFML Application"),jugador("Gabriel", 100, 100, 10), enemigo(&jugador, "Neymi", 100, 100, 10,1){}
+Juego::Juego(): mWindow(sf::VideoMode(640, 480), "SFML Application"),jugador("Gabriel", 100, 100, 10), enemigo(&jugador, "Neymi", 100, 100, 10,1),
+                menu(&mWindow){}
 
 //bucle principal del juego encargado de todos los procesos
 void Juego::run()
