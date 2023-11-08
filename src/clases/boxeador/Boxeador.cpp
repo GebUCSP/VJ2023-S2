@@ -59,6 +59,7 @@ void Boxeador::changeRange()
     this->range = !this->getRange();
 }
 
+//genera un tiempo entre golpes y al impactarlos
 void Boxeador::stun(){
         int cooldown = cd.getElapsedTime().asSeconds();
         if(cooldown > 3) {
@@ -67,6 +68,7 @@ void Boxeador::stun(){
         }
 }
 
+//consigue los estados
 bool Boxeador::getStates(int index) const {
     return states[index];
 }
