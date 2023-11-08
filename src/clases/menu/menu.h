@@ -28,9 +28,9 @@ public:
         backgroundImage.setScale(static_cast<float> (sizeW.x) / background.getSize().x, static_cast<float> (sizeW.y) / background.getSize().y);
 
         //boton
-        play.setPosition(50,50);
-        play.setSize(sf::Vector2f (50,50));
-        play.setFillColor(sf::Color::Cyan);
+        play.setPosition(static_cast<float>(sizeW.x)/4,static_cast<float>(sizeW.y)/3);
+        play.setSize(sf::Vector2f (500,100));
+        play.setFillColor(sf::Color::Transparent);
     }
 
     void checkMouseClick(){

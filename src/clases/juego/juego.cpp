@@ -130,6 +130,7 @@ void Juego::run()
 {
     while (mWindow.isOpen())
     {
+        menu.checkMouseClick();
         jugador.stun();
         enemigo.timer();
         processEvents();
