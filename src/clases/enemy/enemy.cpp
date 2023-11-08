@@ -4,14 +4,11 @@
 
 
 //Constructor clase Enemigo
-Enemigo::Enemigo(Boxeador * _jugador, std::string _nombre, int _vida, int _energia, int _dmg, int _cd, int _frecuencia):
+Enemigo::Enemigo(Boxeador * _jugador, std::string _nombre, int _vida, int _energia, int _dmg, int _frecuencia):
     objetivo{_jugador},
     //Se encarga de la frecuencia de los actaques
     frecuencia(_frecuencia),
     Boxeador(_nombre,_vida,_energia, _dmg){
-        //Reinicia el tiempo en el que no puede golpear el enemigo
-        cd.restart();
-
         //Reinicia el tiempo del ultimo ataque
         clock.restart();
     }
@@ -45,6 +42,7 @@ void Enemigo::timer(){
     } else{
         this->states[1] = false;
     }
+
 }
 
 //determina la accion con el numero aleatorio (falta integrar toas las acciones)
@@ -61,12 +59,12 @@ void Enemigo::accionRandom(int num){
 
 //Enemigo ataca al jugador
 void Enemigo::attack() {
-    if(!objetivo->getRange()){
+    if(!objetivo->getRange() && !objetivo->getStates(1) && !objetivo->getStates(2)){
         this->changeRange();
         std::cout << "bajo ataque" << std::endl;
         objetivo->setVida(objetivo->getVida()-10);
         std::cout << "vida objetivo: " << objetivo->getVida() << std::endl;
     }else{
-        std::cout << "Ataque Bloqueado" << std::endl;
+        std::cout << std::endl;
     }
 }

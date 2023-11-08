@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include "SFML/System/Clock.hpp"
 
 class Boxeador
 {
@@ -17,7 +18,7 @@ protected:
     int vida, energia, dmg;
     //Determina si el jugador realizo una accion primero
     bool range = false;
-
+    sf::Clock cd;
 private:
     //Clase amiga con juego
     friend class Juego;
@@ -30,7 +31,9 @@ public:
     int getEnergia();
     bool getRange() const;
     void changeRange();
+    bool getStates(int) const;
 
+    void stun();
 };
 
 #endif //CMAKESFMLPROJECT_BOXEADOR_H

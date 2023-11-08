@@ -27,18 +27,8 @@ void Juego::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
 
     //Botones presionables y no mantenibles
     //ATTACK
-    if (isPressed) {
+    if (isPressed && !jugador.getRange()) {
         if (key == sf::Keyboard::J) {
-            /*
-            if (jugador.directions[1] && jugador.states[1])
-            {
-                std::cout << "Golpe Derecha con bloqueo" << std::endl;
-            }
-            else if (jugador.directions[3] && jugador.states[1])
-            {
-                std::cout << "Golpe Izquierda con bloqueo" << std::endl;
-            }
-             */
             if (jugador.directions[1]) {
                 std::cout << "Atacando der" << std::endl;
             } else if (jugador.directions[2]) {
@@ -48,8 +38,9 @@ void Juego::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
             } else {
                 std::cout << "Atacando" << std::endl;
             }
+            jugador.changeRange();
+            jugador.stun();
         }
-
         //BLOQUEANDO
         if (key == sf::Keyboard::K) {
             if (jugador.directions[1]) {
@@ -128,13 +119,14 @@ void Juego::render() {
 }
 
 //contructor de clase Juego que inicia la pantalla el jugador y el enemigo
-Juego::Juego(): mWindow(sf::VideoMode(640, 480), "SFML Application"),jugador("Gabriel", 100, 100, 10), enemigo(&jugador, "Neymi", 100, 100, 10, 10,1){}
+Juego::Juego(): mWindow(sf::VideoMode(640, 480), "SFML Application"),jugador("Gabriel", 100, 100, 10), enemigo(&jugador, "Neymi", 100, 100, 10,1){}
 
 //bucle principal del juego encargado de todos los procesos
 void Juego::run()
 {
     while (mWindow.isOpen())
     {
+        jugador.stun();
         enemigo.timer();
         processEvents();
         update();

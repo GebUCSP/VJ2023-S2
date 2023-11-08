@@ -3,6 +3,9 @@
 //Constructor de Boxeador
 Boxeador::Boxeador(std::string _nombre, int _vida, int _energia, int _dmg = 10)
 {
+    //Reinicia el tiempo en el que no puede golpear el enemigo
+    cd.restart();
+
     this->nombre = _nombre;
     this->dmg = _dmg;
 
@@ -54,4 +57,16 @@ bool Boxeador::getRange() const
 void Boxeador::changeRange()
 {
     this->range = !this->getRange();
+}
+
+void Boxeador::stun(){
+        int cooldown = cd.getElapsedTime().asSeconds();
+        if(cooldown > 3) {
+            this->changeRange();
+            cd.restart();
+        }
+}
+
+bool Boxeador::getStates(int index) const {
+    return states[index];
 }
