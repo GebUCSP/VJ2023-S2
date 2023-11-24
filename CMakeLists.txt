@@ -4,10 +4,10 @@ project(CMakeSFMLProject LANGUAGES CXX)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 include(FetchContent)
-FetchContent_Declare(SFML
-        GIT_REPOSITORY https://github.com/SFML/SFML.git
-        GIT_TAG 2.6.x)
+FetchContent_Declare(SFML GIT_REPOSITORY https://github.com/SFML/SFML.git GIT_TAG 2.6.1)
 FetchContent_MakeAvailable(SFML)
+
+set(CMAKE_CXX_STANDARD 17)
 
 add_executable(CMakeSFMLProject src/main.cpp
         src/clases/boxeador/Boxeador.h
@@ -17,6 +17,7 @@ add_executable(CMakeSFMLProject src/main.cpp
         src/clases/enemy/enemy.h
         src/clases/enemy/enemy.cpp
         src/clases/menu/menu.h)
+
 target_link_libraries(CMakeSFMLProject PRIVATE sfml-graphics)
 target_compile_features(CMakeSFMLProject PRIVATE cxx_std_17)
 
