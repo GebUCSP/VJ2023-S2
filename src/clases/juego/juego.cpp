@@ -130,9 +130,16 @@ void Juego::run()
 {
     while (mWindow.isOpen())
     {
-        menu.checkMouseClick();
-        jugador.stun();
-        enemigo.timer();
+        bool state1=menu.play_s() , state2=menu.options_s();
+
+        if (!state1 && !state2){
+            menu.checkMouseClick();
+        }
+
+        if (state1){
+            jugador.stun();
+            enemigo.timer();
+        }
         processEvents();
         update();
         render();
