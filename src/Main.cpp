@@ -1,16 +1,11 @@
-#include "clases/juego/juego.h"
 #include <SFML/Graphics.hpp>
+#include "../header/juego.h"
 
-using namespace std;
-using namespace sf;
+int main(){
 
-int main()
-{
-    //Se crea la clase juego
-    Juego juego;
+    Juego Game;
 
-    //Se inicia la funciona run la cual contiene el bucle principal
-    juego.run();
+    Game.run();
 
     return 0;
 }
