@@ -10,13 +10,13 @@ class Menu{
     friend class Juego;
 private:
 
-    bool a_play=false , a_options= false;
+    bool a_play = false , a_options = false , a_back = false;
 
     sf::RenderWindow* window;
     sf::Texture background;
     sf::Sprite backgroundImage;
 
-    sf::RectangleShape play,options;
+    sf::RectangleShape play,options,back;
 
 public:
     //Constructor
@@ -39,13 +39,20 @@ public:
         options.setPosition(static_cast<float>(sizeW.x)-180,static_cast<double>(sizeW.y)-100);
         options.setSize(sf::Vector2f (550,100));
         options.setFillColor(sf::Color::Transparent);
+        //Condicional para empezar a ejecutar el boton back
+        if (a_options){
+            back.setPosition(static_cast<float>(sizeW.x)-180,static_cast<double>(sizeW.y)-100);
+            back.setSize(sf::Vector2f (300,100));
+            options.setFillColor(sf::Color::Transparent);
+        }
     }
 
     //Funcion para chekear el presionado del mouse
-    void checkMouseClick(){
+    void checkMouseClick1(){
         sf::Vector2i mousePos = sf::Mouse::getPosition();
         sf::Vector2f mousePosCoords = window->mapPixelToCoords(mousePos);
-
+        //Cambiar el estado del a_back
+        a_back = false;
         //Detectar si se ha oprimido el boton play
         if (play.getGlobalBounds().contains(mousePosCoords)){
             if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
@@ -63,11 +70,23 @@ public:
         }
     }
 
+    void checkMouseClick2(){
+        sf::Vector2i mousePos = sf::Mouse::getPosition();
+        sf::Vector2f mousePosCoords = window->mapPixelToCoords(mousePos);
+        if (back.getGlobalBounds().contains(mousePosCoords)){
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+                a_back = true;
+                std::cout << "Back presionado"<< std::endl;
+            }
+        }
+    }
     //Para dibujar el fondo y los botones
     void dibujarFondo(){
         window->draw(backgroundImage);
-        window->draw(play);
-        window->draw(options);
+        if (!a_play && !a_options) {
+            window->draw(play);
+            window->draw(options);
+        }
     }
 
     //Para detectar fuera de la clase si se ha oprimido el boton play o el options

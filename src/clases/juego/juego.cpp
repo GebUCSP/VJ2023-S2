@@ -84,7 +84,7 @@ void Juego::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
 
 //Bucle procesador de eventos
 void Juego::processEvents() {
-    sf::Event event;
+    sf::Event event{};
     //Bucle de events detectados
     while (mWindow.pollEvent(event))
     {
@@ -130,13 +130,20 @@ void Juego::run()
 {
     while (mWindow.isOpen())
     {
-        bool state1=menu.play_s() , state2=menu.options_s();
-
-        if (!state1 && !state2){
-            menu.checkMouseClick();
+        //Cambiado los cosos detectores por que debdo a friend se pueden acceder
+        if (!menu.a_play && !menu.a_options){
+            menu.checkMouseClick1();
         }
-
-        if (state1){
+        //Para estar en el menu options , en el cual ya no chekea si se ha presionado play o options
+        //Ahora solo verifica si se presiona back para volver al primer menu
+        if (menu.a_options){
+            menu.checkMouseClick2();
+                if (menu.a_back){
+                    menu.a_options = false;
+                }
+        }
+        //Verificacion para que si es presionado el boton play se ejecute el juego
+        if (menu.a_play){
             jugador.stun();
             enemigo.timer();
         }
