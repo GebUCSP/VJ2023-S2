@@ -13,10 +13,6 @@ Boxeador::~Boxeador()=default;
 
 //FUNCIONES
 
-void Boxeador::drawMe(void) {
-    return;
-}
-
 //FUNCIONES SET
 
 void Boxeador::setNombre(std::string _nombre) {
@@ -47,6 +43,14 @@ void Boxeador::changeDirections(int index, bool boolean) {
 
 std::string Boxeador::getNombre(){
     return nombre;
+}
+
+sf::Sprite Boxeador::getSprite(){
+    return this->sprite;
+}
+
+sf::Texture Boxeador::getTexture() {
+    return this->texture;
 }
 
 int Boxeador::getVida() {
@@ -85,9 +89,26 @@ void Boxeador::print() {
 }
 
 void Boxeador::attack(Boxeador* objetivo) {
-    if(!objetivo->getStates(1) && !objetivo->getStates(2)){
+    if(!objetivo->getStates(1)){
         objetivo->setVida(objetivo->getVida()-this->getDmg());
-    }else if(objetivo->getStates(2) || objetivo->getStates(1)){
+    }else if(objetivo->getStates(1) && this->directions == objetivo->directions){
+        objetivo->setEnergia(objetivo->getEnergia()-10);
+    }else if(objetivo->getStates(1)){
         objetivo->setEnergia(objetivo->getEnergia()-20);
     }
 }
+
+void Boxeador::updateIu() {
+    vida_f.setString("Vida: " + std::to_string(this->vida));
+    energia_f.setString("Energia: " + std::to_string(this->energia));
+    nombre_f.setString(this->nombre);
+
+}
+
+void Boxeador::iu(sf::RenderWindow* window){
+    window->draw(vida_f);
+    window->draw(energia_f);
+    window->draw(nombre_f);
+}
+
+

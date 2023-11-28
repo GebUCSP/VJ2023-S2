@@ -2,8 +2,8 @@
 #include "../header/jugador.h"
 
 Juego::Juego(): mWindow(sf::VideoMode(1000,650),"SFML"), menu(&mWindow){
-    player = new Jugador("string",100,100,10);
-    enemigo = new Enemigo("string",100,100,10);
+    player = new Jugador("Yo",100,100,10);
+    enemigo = new Enemigo("Arnold",100,100,10,3,5);
 }
 
 Juego::~Juego(){
@@ -14,7 +14,10 @@ Juego::~Juego(){
 void Juego::run() {
     while (mWindow.isOpen()) {
         eventos();
-        enemigo->timer(player);
+        if (menu.a_play){
+            enemigo->timer(player);
+        }
+
         render();
         if (!menu.a_play && !menu.a_options){
             menu.checkMouseClick1();
@@ -31,7 +34,13 @@ void Juego::run() {
 
 void Juego::render() {
     mWindow.clear();
-    menu.dibujarFondo();
+    if(!menu.getDelete()){
+        menu.dibujarFondo();
+    }else{
+        mWindow.draw(player->getSprite());
+        player->iu(&mWindow);
+        enemigo->iu(&mWindow);
+    }
     mWindow.display();
 }
 
@@ -41,6 +50,9 @@ void Juego::eventos() {
         switch (evento.type) {
             case sf::Event::KeyPressed:
                 player->inputs(evento.key.code, true);
+                if(player->getStates(0)){
+                    player->attack(enemigo);
+                }
                 player->print();
                 datos();
                 break;
@@ -54,7 +66,11 @@ void Juego::eventos() {
                 break;
         }
     }
+    player->updateIu();
+    enemigo->updateIu();
+
 }
+
 
 void Juego::datos() {
     std::cout << player->getVida() << std::endl;

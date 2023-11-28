@@ -10,7 +10,7 @@ class Menu{
     friend class Juego;
 private:
 
-    bool a_play = false , a_options = false , a_back = false;
+    bool a_play = false , a_options = false , a_back = false, deleteSprites = false;
 
     sf::RenderWindow* window;
     sf::Texture background;
@@ -28,6 +28,8 @@ public:
 
     //Para dibujar el fondo y los botones
     void dibujarFondo();
+
+    bool getDelete();
 };
 
 #endif //CMAKESFMLPROJECT_MENU_H

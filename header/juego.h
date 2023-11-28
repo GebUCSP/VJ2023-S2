@@ -22,6 +22,9 @@ private:
     Boxeador* player;
     Boxeador* enemigo;
 
+
+
+
 public:
     Juego();
     ~Juego();
