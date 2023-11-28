@@ -8,11 +8,11 @@ Jugador::Jugador(std::string _nombre, int _vida, int _energia, int _dmg): Boxead
     }
 
     posInitial.x = 450.0f;
-    posInitial.y = 500.0f;
+    posInitial.y = 400.0f;
 
     sprite.setTexture(texture);
     sprite.setScale(6,6);
-    sprite.setPosition(450,500);
+    sprite.setPosition(450,400);
 
     if (!font.loadFromFile("resource/arial.ttf"))
     {
@@ -30,7 +30,7 @@ Jugador::Jugador(std::string _nombre, int _vida, int _energia, int _dmg): Boxead
 
 
 
-void Jugador::move(bool prueba, std::string dir = "none"){
+void Jugador::move( std::string dir = "none"){
     int x;
     if (dir == "der"){
         x = 1;
@@ -86,11 +86,11 @@ void Jugador::inputs(sf::Keyboard::Key key, bool isPressed) {
 
     if(states[0]){
         if(directions[0]){
-            move(isPressed,"der");
+            move("der");
         }else if(directions[2]){
-            move(isPressed,"izq");
+            move("izq");
         }else{
-            move(isPressed);
+            move();
         }
     }
 

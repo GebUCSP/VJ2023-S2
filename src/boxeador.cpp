@@ -89,7 +89,10 @@ void Boxeador::print() {
 }
 
 void Boxeador::attack(Boxeador* objetivo) {
-    if(!objetivo->getStates(1)){
+    if(objetivo->getStates(0) && this->getStates(0)){
+        objetivo->setVida(objetivo->getVida()-10);
+        this->setVida(this->getVida()-10);
+    }else if(!objetivo->getStates(1)){
         objetivo->setVida(objetivo->getVida()-this->getDmg());
     }else if(objetivo->getStates(1) && this->directions == objetivo->directions){
         objetivo->setEnergia(objetivo->getEnergia()-10);
@@ -110,5 +113,3 @@ void Boxeador::iu(sf::RenderWindow* window){
     window->draw(energia_f);
     window->draw(nombre_f);
 }
-
-

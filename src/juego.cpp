@@ -3,7 +3,7 @@
 
 Juego::Juego(): mWindow(sf::VideoMode(1000,650),"SFML"), menu(&mWindow){
     player = new Jugador("Yo",100,100,10);
-    enemigo = new Enemigo("Arnold",100,100,10,3,5);
+    enemigo = new Enemigo("Arnold",100,100,10,1,4);
 }
 
 Juego::~Juego(){
@@ -38,6 +38,7 @@ void Juego::render() {
         menu.dibujarFondo();
     }else{
         mWindow.draw(player->getSprite());
+        mWindow.draw(enemigo->getSprite());
         player->iu(&mWindow);
         enemigo->iu(&mWindow);
     }
