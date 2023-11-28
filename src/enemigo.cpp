@@ -6,7 +6,7 @@ Enemigo::Enemigo(std::string _nombre, int _vida, int _energia, int _dmg, int _fr
     frecuenciaMin =_frecuenciaMin;
     frecuenciaMax = _frecuenciaMax;
 
-    if(!texture.loadFromFile("resource/menu.jpg",sf::IntRect(20,20,20,20))){
+    if(!texture.loadFromFile("../../resource/menu.jpg",sf::IntRect(20,20,20,20))){
         std::cout << "error cargar" << std::endl;
     }
 
@@ -17,7 +17,7 @@ Enemigo::Enemigo(std::string _nombre, int _vida, int _energia, int _dmg, int _fr
     sprite.setScale(6,6);
     sprite.setPosition(posInitial);
 
-    if (!font.loadFromFile("resource/arial.ttf"))
+    if (!font.loadFromFile("../../resource/arial.ttf"))
     {
         std::cout << "fallo carga fuente enemigo" << std::endl;
     }

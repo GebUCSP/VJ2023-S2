@@ -14,11 +14,12 @@ Juego::~Juego(){
 void Juego::run() {
     while (mWindow.isOpen()) {
         eventos();
+        render();
+
         if (menu.a_play){
             enemigo->timer(player);
         }
-
-        render();
+        
         if (!menu.a_play && !menu.a_options){
             menu.checkMouseClick1();
         }

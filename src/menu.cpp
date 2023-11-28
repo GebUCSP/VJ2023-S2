@@ -3,7 +3,7 @@
 Menu::Menu(sf::RenderWindow *_window): window{_window}{
 
     //Comprobacion si el achivo llego a cargar o no
-    if(!background.loadFromFile("resource/menu.jpg")){
+    if(!background.loadFromFile("../../resource/menu.jpg")){
         std::cerr << "Error al cargar texturas";
     }
     backgroundImage.setTexture(background);
@@ -13,18 +13,17 @@ Menu::Menu(sf::RenderWindow *_window): window{_window}{
     backgroundImage.setScale(static_cast<float> (sizeW.x) / background.getSize().x, static_cast<float> (sizeW.y) / background.getSize().y);
 
     //boton play *posicion , tamaño y transparencia
-    play.setPosition(static_cast<float>(sizeW.x)-180,static_cast<double>(sizeW.y)-200);
-    play.setSize(sf::Vector2f (300,100));
-    play.setFillColor(sf::Color::Transparent);
+    play.setPosition(static_cast<float>(sizeW.x+100),static_cast<float>(sizeW.y));
+    play.setSize(sf::Vector2f (350,90));
+    play.setFillColor(sf::Color::Green);
 
     //boton options *posicion , tamaño y transparencia
-    options.setPosition(static_cast<float>(sizeW.x)-180,static_cast<double>(sizeW.y)-100);
-    options.setSize(sf::Vector2f (550,100));
+    options.setPosition(static_cast<float>(sizeW.x),static_cast<float>(sizeW.y+150));
+    options.setSize(sf::Vector2f (580,90));
     options.setFillColor(sf::Color::Transparent);
 
-    back.setPosition(static_cast<float>(sizeW.x)-180,static_cast<double>(sizeW.y));
-    back.setSize(sf::Vector2f (300,100));
-
+    back.setPosition(static_cast<float>(sizeW.x),static_cast<float>(sizeW.y+350));
+    back.setSize(sf::Vector2f (400,90));
     options.setFillColor(sf::Color::Transparent);
 }
 
@@ -72,6 +71,6 @@ void Menu::dibujarFondo() {
     window->draw(back);
 }
 
-bool Menu::getDelete() {
+bool Menu::getDelete() const{
     return deleteSprites;
 }

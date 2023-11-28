@@ -29,7 +29,7 @@ public:
     //Para dibujar el fondo y los botones
     void dibujarFondo();
 
-    bool getDelete();
+    bool getDelete() const;
 };
 
 #endif //CMAKESFMLPROJECT_MENU_H

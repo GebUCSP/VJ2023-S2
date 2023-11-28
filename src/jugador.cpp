@@ -3,7 +3,7 @@
 #include <iostream>
 
 Jugador::Jugador(std::string _nombre, int _vida, int _energia, int _dmg): Boxeador(_nombre,_vida,_energia,_dmg) {
-    if(!texture.loadFromFile("resource/menu.jpg",sf::IntRect(20,20,20,20))){
+    if(!texture.loadFromFile("../../resource/menu.jpg",sf::IntRect(20,20,20,20))){
         std::cout << "error cargar" << std::endl;
     }
 
@@ -14,7 +14,7 @@ Jugador::Jugador(std::string _nombre, int _vida, int _energia, int _dmg): Boxead
     sprite.setScale(6,6);
     sprite.setPosition(450,400);
 
-    if (!font.loadFromFile("resource/arial.ttf"))
+    if (!font.loadFromFile("../../resource/arial.ttf"))
     {
         std::cout << "fallo carga fuente" << std::endl;
     }
