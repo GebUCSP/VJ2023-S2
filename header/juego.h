@@ -10,11 +10,14 @@
 #include "../header/boxeador.h"
 #include "../header/jugador.h"
 #include "../header/enemigo.h"
+#include "../header/menu.h"
 
 
 class Juego{
 private:
     sf::RenderWindow mWindow;
+
+    Menu menu;
 
     Boxeador* player;
     Boxeador* enemigo;
