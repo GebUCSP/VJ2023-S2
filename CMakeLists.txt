@@ -10,13 +10,14 @@ FetchContent_Declare(SFML
 FetchContent_MakeAvailable(SFML)
 
 add_executable(CMakeSFMLProject src/main.cpp
-        src/clases/boxeador/Boxeador.h
-        src/clases/boxeador/Boxeador.cpp
-        src/clases/juego/juego.h
-        src/clases/juego/juego.cpp
-        src/clases/enemy/enemy.h
-        src/clases/enemy/enemy.cpp
-        src/clases/menu/menu.h)
+        header/boxeador.h
+        src/boxeador.cpp
+        header/juego.h
+        src/juego.cpp
+        header/jugador.h
+        src/jugador.cpp
+        header/enemigo.h
+        src/enemigo.cpp)
 target_link_libraries(CMakeSFMLProject PRIVATE sfml-graphics)
 target_compile_features(CMakeSFMLProject PRIVATE cxx_std_17)
 
