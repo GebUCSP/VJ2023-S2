@@ -3,7 +3,7 @@
 Menu::Menu(sf::RenderWindow *_window): window{_window}{
 
     //Comprobacion si el achivo llego a cargar o no
-    if(!background.loadFromFile("img/menu.jpg")){
+    if(!background.loadFromFile("../../img/menu.jpg")){
         std::cerr << "Error al cargar texturas";
     }
     backgroundImage.setTexture(background);
@@ -11,7 +11,10 @@ Menu::Menu(sf::RenderWindow *_window): window{_window}{
     //Set del fondo
     sf::Vector2u sizeW = window->getSize();
     backgroundImage.setScale(static_cast<float> (sizeW.x) / background.getSize().x, static_cast<float> (sizeW.y) / background.getSize().y);
-
+    //Musica
+    musica.openFromFile("../../img/Bezos.ogg");
+    musica.setVolume(5.0f);
+    musica.play();
     //boton play *posicion , tamaño y transparencia
     play.setPosition(static_cast<float>(sizeW.x)-180,static_cast<double>(sizeW.y)-200);
     play.setSize(sf::Vector2f (300,100));

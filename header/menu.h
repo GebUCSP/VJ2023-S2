@@ -5,6 +5,7 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/Graphics/Texture.hpp"
 #include <SFML/Window/Mouse.hpp>
+#include <SFML/Audio.hpp>
 
 class Menu{
     friend class Juego;
@@ -18,6 +19,7 @@ private:
 
     sf::RectangleShape play,options,back;
 
+    sf::Music musica;
 public:
     //Constructor
     Menu(sf::RenderWindow*);
