@@ -13,16 +13,17 @@ Menu::Menu(sf::RenderWindow *_window): window{_window}{
     backgroundImage.setScale(static_cast<float> (sizeW.x) / background.getSize().x, static_cast<float> (sizeW.y) / background.getSize().y);
 
     //boton play *posicion , tamaño y transparencia
-    play.setPosition(static_cast<float>(sizeW.x+100),static_cast<float>(sizeW.y));
+    play.setPosition(static_cast<float>(sizeW.x-210),static_cast<float>(sizeW.y-170));
+    std::cout<<sizeW.y;
     play.setSize(sf::Vector2f (350,90));
-    play.setFillColor(sf::Color::Green);
+    play.setFillColor(sf::Color::Transparent);
 
     //boton options *posicion , tamaño y transparencia
-    options.setPosition(static_cast<float>(sizeW.x),static_cast<float>(sizeW.y+150));
-    options.setSize(sf::Vector2f (580,90));
+    options.setPosition(static_cast<float>(sizeW.x-400),static_cast<float>(sizeW.y-20));
+    options.setSize(sf::Vector2f (650,90));
     options.setFillColor(sf::Color::Transparent);
 
-    back.setPosition(static_cast<float>(sizeW.x),static_cast<float>(sizeW.y+350));
+    back.setPosition(static_cast<float>(sizeW.x-180),static_cast<float>(sizeW.y+100));
     back.setSize(sf::Vector2f (400,90));
     options.setFillColor(sf::Color::Transparent);
 }
