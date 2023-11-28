@@ -69,3 +69,16 @@ void Menu::dibujarFondo() {
     window->draw(options);
     window->draw(back);
 }
+
+void Menu::check() {
+    if (!a_play && !a_options){
+        checkMouseClick1();
+    }
+
+    if (a_options){
+        checkMouseClick2();
+        if (a_back){
+            a_options = false;
+        }
+    }
+}

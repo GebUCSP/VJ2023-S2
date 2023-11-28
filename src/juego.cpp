@@ -1,9 +1,10 @@
 #include "../header/juego.h"
 #include "../header/jugador.h"
 
-Juego::Juego(): mWindow(sf::VideoMode(1000,650),"SFML"), menu(&mWindow){
+Juego::Juego(): mWindow(sf::VideoMode(1000,600),"SFML"), menu(&mWindow){
     player = new Jugador("string",100,100,10);
     enemigo = new Enemigo("string",100,100,10);
+    mWindow.setFramerateLimit(20);
 }
 
 Juego::~Juego(){
@@ -16,22 +17,14 @@ void Juego::run() {
         eventos();
         enemigo->timer(player);
         render();
-        if (!menu.a_play && !menu.a_options){
-            menu.checkMouseClick1();
-        }
-
-        if (menu.a_options){
-            menu.checkMouseClick2();
-            if (menu.a_back){
-                menu.a_options = false;
-            }
-        }
+        menu.check();
     }
 }
 
 void Juego::render() {
-    mWindow.clear();
-    menu.dibujarFondo();
+    mWindow.clear(sf::Color::White);
+    //menu.dibujarFondo();
+    mWindow.draw(player->getSprite());
     mWindow.display();
 }
 
@@ -54,6 +47,7 @@ void Juego::eventos() {
                 break;
         }
     }
+    player->check1();
 }
 
 void Juego::datos() {

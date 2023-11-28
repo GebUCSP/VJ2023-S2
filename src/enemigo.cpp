@@ -5,10 +5,6 @@ Enemigo::Enemigo(std::string _nombre, int _vida, int _energia, int _dmg): Boxead
     numRandom = static_cast<int>(random());
 }
 
-void Enemigo::drawMe() {
-    return;
-}
-
 void Enemigo::inputs(sf::Keyboard::Key, bool) {
     return;
 }
@@ -29,3 +25,10 @@ void Enemigo::timer(Boxeador* boxeador) {
     }
 }
 
+void Enemigo::check1() {
+    return;
+}
+
+void Enemigo::check2() {
+    return;
+}

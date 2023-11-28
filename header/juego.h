@@ -15,6 +15,7 @@
 
 class Juego{
 private:
+
     sf::RenderWindow mWindow;
 
     Menu menu;

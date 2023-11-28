@@ -13,8 +13,16 @@ Boxeador::~Boxeador()=default;
 
 //FUNCIONES
 
-void Boxeador::drawMe(void) {
-    return;
+void Boxeador::drawMe(sf::Sprite &image, sf::Texture &textura) {
+    sf::IntRect rectangulo_imagen = image.getTextureRect(); // se obtiene la info sobre las coordenadas de la imagen actual
+    
+    rectangulo_imagen.left += 256;  // se incrementa el ancho de cada imagen a la actual
+
+    if (rectangulo_imagen.left + rectangulo_imagen.width > textura.getSize().x) { // verificamos si el siguiente cuadro excede al ancho total
+        rectangulo_imagen.left = 0; // si cumple, se restablece a la posicion inicial (0)
+    }
+
+    image.setTextureRect(rectangulo_imagen);
 }
 
 //FUNCIONES SET
@@ -44,6 +52,10 @@ void Boxeador::changeDirections(int index, bool boolean) {
 }
 
 //FUNCIONES GET
+
+sf::Sprite &Boxeador::getSprite() {
+    return s_golpes;
+}
 
 std::string Boxeador::getNombre(){
     return nombre;

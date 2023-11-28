@@ -14,9 +14,10 @@ private:
 public:
     Enemigo(std::string, int, int, int);
 
-    void drawMe() override;
     void inputs(sf::Keyboard::Key, bool) override;
     void timer(Boxeador*) override;
+    void check1() override;
+    void check2();
 
     int random();
 

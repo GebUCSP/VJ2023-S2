@@ -25,7 +25,7 @@ public:
     //Funcion para chekear el presionado del mouse
     void checkMouseClick1();
     void checkMouseClick2();
-
+    void check();
     //Para dibujar el fondo y los botones
     void dibujarFondo();
 };

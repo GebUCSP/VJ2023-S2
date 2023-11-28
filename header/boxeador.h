@@ -17,20 +17,32 @@ protected:
     //reloj propio
     sf::Clock clock1;
 
+    sf::Sprite image;
+
+    std::vector<sf::Texture>t_golpes;
+    std::vector<sf::Texture>t_states;
+
+    sf::Sprite s_states;
+    std::vector<int>tiempos_g;
+    std::vector<int>tiempos_t;
+
 public:
+    sf::Sprite s_golpes;
     Boxeador(std::string ,int, int, int);
 
     ~Boxeador();
 
-    virtual void drawMe() = 0;
+    virtual void drawMe(sf::Sprite&, sf::Texture&);
     virtual void inputs(sf::Keyboard::Key, bool) = 0;
     virtual void timer(Boxeador*)=0;
+    virtual void check1()=0;
 
      void attack(Boxeador*);
 
     void changeStates(int, bool);
     void changeDirections(int, bool);
 
+    sf::Sprite& getSprite();
     std::string getNombre();
     int getVida();
     int getEnergia();
