@@ -18,7 +18,7 @@ private:
 public:
     //Constructor
     Menu(sf::RenderWindow* _window): window{_window}{
-        if(!background.loadFromFile("src/clases/menu/menu.jpg")){
+        if(!background.loadFromFile("../../src/clases/menu/menu.jpg")){
             std::cerr << "Error al cargar texturas";
         }
         backgroundImage.setTexture(background);

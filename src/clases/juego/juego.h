@@ -6,6 +6,7 @@
 #include "../boxeador/Boxeador.h"
 #include "../enemy/enemy.h"
 #include "../menu/menu.h"
+#include "SFML/Graphics/Texture.hpp"
 
 class Juego
 {
@@ -15,6 +16,10 @@ private:
 
     //pruebas de dibujo del jugador (OMITIR)
     sf::CircleShape mPlayer;
+
+    sf::Texture texture;
+    sf::Sprite image;
+
 
     //Menú
 

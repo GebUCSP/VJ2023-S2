@@ -113,17 +113,23 @@ void Juego::processEvents() {
 void Juego::update() {}
 
 //renderizado en pantalla
-void Juego::render() {
-    mWindow.clear();
 
-    menu.dibujarFondo();
-
-    mWindow.display();
-}
 
 //contructor de clase Juego que inicia la pantalla el jugador y el enemigo
 Juego::Juego(): mWindow(sf::VideoMode(1000, 650), "SFML Application"),jugador("Gabriel", 100, 100, 10), enemigo(&jugador, "Neymi", 100, 100, 10,1),
-                menu(&mWindow){}
+                menu(&mWindow){
+
+
+    if (!texture.loadFromFile("../../src/clases/juego/boxing.png"))
+        std::cout << "error" << std::endl;
+    image.setTexture(texture);
+    image.setScale(static_cast<float> (1000) / texture.getSize().x, static_cast<float> (1000) / texture.getSize().y);
+
+
+
+
+
+}
 
 //bucle principal del juego encargado de todos los procesos
 void Juego::run()
@@ -136,5 +142,14 @@ void Juego::run()
         processEvents();
         update();
         render();
+
     }
+}
+void Juego::render() {
+    mWindow.clear();
+    menu.dibujarFondo();
+    mWindow.draw(image);
+
+    mWindow.display();
+
 }
