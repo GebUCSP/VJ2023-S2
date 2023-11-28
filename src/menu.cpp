@@ -39,6 +39,7 @@ void Menu::checkMouseClick1() {
     if (play.getGlobalBounds().contains(mousePosCoords)){
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
             a_play= true;
+            deleteSprites = true;
             std::cout << "Play presionado" << std::endl;
         }
     }
@@ -64,8 +65,10 @@ void Menu::checkMouseClick2() {
 }
 
 void Menu::dibujarFondo() {
-    window->draw(backgroundImage);
-    window->draw(play);
-    window->draw(options);
-    window->draw(back);
+    if (!deleteSprites) {
+        window->draw(backgroundImage);
+        window->draw(play);
+        window->draw(options);
+        window->draw(back);
+    }
 }

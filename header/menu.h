@@ -10,7 +10,7 @@ class Menu{
     friend class Juego;
 private:
 
-    bool a_play = false , a_options = false , a_back = false;
+    bool a_play = false , a_options = false , a_back = false , deleteSprites = false;
 
     sf::RenderWindow* window;
     sf::Texture background;
