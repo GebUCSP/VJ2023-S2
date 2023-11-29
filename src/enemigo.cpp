@@ -3,13 +3,13 @@
 
 Enemigo::Enemigo(std::string _nombre, int _vida, int _energia, int _dmg, int _frecuenciaMin, int _frecuenciaMax): Boxeador(_nombre,_vida,_energia,_dmg){
     //////////////////////////////
-    if(!texture.loadFromFile("resource/e_img(1).png")){
+    if(!texture.loadFromFile("../../resource/e_img(1).png")){
         std::cout << "error cargar" << std::endl;
     }
-    if(!texture1.loadFromFile("resource/e_img(2).png")){
+    if(!texture1.loadFromFile("../../resource/e_img(2).png")){
         std::cout << "error fatal" << std::endl;
     }
-    if(!texture2.loadFromFile("resource/e_img(3).png")){
+    if(!texture2.loadFromFile("../../resource/e_img(3).png")){
         std::cout << "error fatal" << std::endl;
     }
 
@@ -30,7 +30,7 @@ Enemigo::Enemigo(std::string _nombre, int _vida, int _energia, int _dmg, int _fr
     sprite.setScale(1.7,1.7);
     sprite.setPosition(posInitial);
 
-    if (!font.loadFromFile("resource/font.ttf"))
+    if (!font.loadFromFile("../../resource/font.ttf"))
     {
         std::cout << "fallo carga fuente enemigo" << std::endl;
     }
@@ -65,7 +65,7 @@ void Enemigo::timer(Boxeador* boxeador) {
         this->changeStates(0,true);
         this->changeStates(1,false);
     }else if (lastAction*2 >= numRandom){
-        this->changeStates(1, true);
+        this->changeStates(0, true);
         this->changeStates(1,false);
     }
 

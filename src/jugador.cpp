@@ -4,13 +4,13 @@
 
 Jugador::Jugador(std::string _nombre, int _vida, int _energia, int _dmg): Boxeador(_nombre,_vida,_energia,_dmg) {
     //////////////////////////////
-    if(!texture.loadFromFile("resource/p_img(1).png")){
+    if(!texture.loadFromFile("../../resource/p_img(1).png")){
         std::cout << "error cargar" << std::endl;
     }
-    if(!texture1.loadFromFile("resource/p_img(2).png")){
+    if(!texture1.loadFromFile("../../resource/p_img(2).png")){
         std::cout << "error fatal" << std::endl;
     }
-    if(!texture2.loadFromFile("resource/p_img(3).png")){
+    if(!texture2.loadFromFile("../../resource/p_img(3).png")){
         std::cout << "error fatal" << std::endl;
     }
 
@@ -30,7 +30,7 @@ Jugador::Jugador(std::string _nombre, int _vida, int _energia, int _dmg): Boxead
     sprite.setPosition(posInitial);
 
 
-    if (!font.loadFromFile("resource/font.ttf"))
+    if (!font.loadFromFile("../../resource/font.ttf"))
     {
         std::cout << "fallo carga fuente" << std::endl;
     }

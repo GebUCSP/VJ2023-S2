@@ -3,7 +3,7 @@
 Menu::Menu(sf::RenderWindow *_window): window{_window}{
 
     //Comprobacion si el achivo llego a cargar o no
-    if(!background.loadFromFile("resource/menu.jpg")){
+    if(!background.loadFromFile("../../resource/menu.jpg")){
         std::cerr << "Error al cargar texturas";
     }
     backgroundImage.setTexture(background);
