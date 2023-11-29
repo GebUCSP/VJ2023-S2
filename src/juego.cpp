@@ -39,15 +39,12 @@ void Juego::run() {
         }
 
         render();
-        if (!menu.a_play && !menu.a_options){
+        if (!menu.a_play && !menu.a_exit){
             menu.checkMouseClick1();
         }
 
-        if (menu.a_options){
-            menu.checkMouseClick2();
-            if (menu.a_back){
-                menu.a_options = false;
-            }
+        if (menu.a_exit){
+            mWindow.close();
         }
     }
 }
