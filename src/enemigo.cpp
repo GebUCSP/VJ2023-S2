@@ -62,11 +62,7 @@ int Enemigo::random(int a, int b){
 void Enemigo::timer(Boxeador* boxeador) {
     return ;
     }
-
-
-    std::fill(this->directions.begin(), this->directions.end(), false);
-}
-
+    
 std::string Enemigo::randomDirection() {
     int randomNum = random(0,2);
     if (randomNum == 0){
