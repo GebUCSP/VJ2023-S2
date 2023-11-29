@@ -12,7 +12,7 @@ Enemigo::Enemigo(std::string _nombre, int _vida, int _energia, int _dmg, int _fr
     if(!texture2.loadFromFile("../../resource/e_img(3).png")){
         std::cout << "error fatal" << std::endl;
     }
-    if(!texture3.loadFromFile("resource/p_img(3).png")){
+    if(!texture3.loadFromFile("../../resource/p_img(3).png")){
         std::cout << "error fatal" << std::endl;
     }
 
