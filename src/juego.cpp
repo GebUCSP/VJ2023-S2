@@ -7,10 +7,10 @@ Juego::Juego(): mWindow(sf::VideoMode(1000,650),"SFML"), menu(&mWindow){
 
     mWindow.setFramerateLimit(10);
 
-    if(!background.loadFromFile("resource/fondo.jpg")){
+    if(!background.loadFromFile("../../resource/fondoo.png")){
         std::cerr << "Error al cargar texturas";
     }
-    if(!cuerdas.loadFromFile("resource/cuerdas.png")){
+    if(!cuerdas.loadFromFile("../../resource/cuerdas.png")){
         std::cerr << "Error al cargar texturas";
     }
     s_background.setTexture(background);
@@ -18,7 +18,8 @@ Juego::Juego(): mWindow(sf::VideoMode(1000,650),"SFML"), menu(&mWindow){
 
     //Set del fondo
     sf::Vector2u sizeW = mWindow.getSize();
-    s_background.setScale(static_cast<float> (sizeW.x) / background.getSize().x, static_cast<float> (sizeW.y) / background.getSize().y);
+    s_background.setScale(static_cast<float> (sizeW.x) / s_background.getLocalBounds().width, static_cast<float> (sizeW.y) / s_background.getLocalBounds().height);
+   // s_background.scale(sf::Vector2f(0,0));
     s_cuerdas.setScale(650, static_cast<float> (sizeW.y) / background.getSize().y);
 
     s_cuerdas.setPosition(0,250);
@@ -38,15 +39,12 @@ void Juego::run() {
         }
 
         render();
-        if (!menu.a_play && !menu.a_options){
+        if (!menu.a_play && !menu.a_exit){
             menu.checkMouseClick1();
         }
 
-        if (menu.a_options){
-            menu.checkMouseClick2();
-            if (menu.a_back){
-                menu.a_options = false;
-            }
+        if (menu.a_exit){
+            mWindow.close();
         }
     }
 }
