@@ -21,6 +21,10 @@ Jugador::Jugador(std::string _nombre, int _vida, int _energia, int _dmg): Boxead
     posInitial.x = 675.0f;
     posInitial.y = 600.0f;
 
+    texture.setSmooth(true);
+    texture1.setSmooth(true);
+    texture2.setSmooth(true);
+
     sprite.setTexture(texture);
     sprite.setOrigin(sprite.getLocalBounds().width,sprite.getLocalBounds().height);
 
@@ -122,7 +126,7 @@ void Jugador::movement( ){
 
     }else if(states[1]){
         if(directions[0] || directions[2]){
-            this->sprite.move(-80.0f * dirImg, -80.0f);
+            this->sprite.move(-50.0f * dirImg, -80.0f);
         }
         this->sprite.setTexture(texture1);
     }else{
