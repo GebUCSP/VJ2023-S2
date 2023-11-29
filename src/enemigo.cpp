@@ -15,6 +15,10 @@ Enemigo::Enemigo(std::string _nombre, int _vida, int _energia, int _dmg, int _fr
 
     /////////////////////////
 
+    texture.setSmooth(true);
+    texture1.setSmooth(true);
+    texture2.setSmooth(true);
+
     numRandom = static_cast<int>(random(frecuenciaMin, frecuenciaMax));
     frecuenciaMin =_frecuenciaMin;
     frecuenciaMax = _frecuenciaMax;
