@@ -32,14 +32,12 @@ void Menu::checkMouseClick1() {
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
             a_play = true;
             deleteSprites = true;
-            std::cout << "Play presionado" << std::endl;
         }
     }
     //Detectar si se ha oprimido el boton exit
     if (exit.getGlobalBounds().contains(mousePosCoords)) {
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
             a_exit = true;
-            std::cout << "exit presionado" << std::endl;
         }
     }
 }

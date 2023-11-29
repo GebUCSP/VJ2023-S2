@@ -37,7 +37,7 @@ Enemigo::Enemigo(std::string _nombre, int _vida, int _energia, int _dmg, int _fr
     sprite.setScale(1.7,1.7);
     sprite.setPosition(posInitial);
 
-    if (!font.loadFromFile("resource/font.ttf"))
+    if (!font.loadFromFile("../../resource/font.ttf"))
     {
         std::cout << "fallo carga fuente enemigo" << std::endl;
     }
@@ -60,20 +60,7 @@ int Enemigo::random(int a, int b){
 }
 
 void Enemigo::timer(Boxeador* boxeador) {
-    lastAction = clock1.getElapsedTime().asSeconds();
-    sprite.setPosition(posInitial);
-    bool OK = lastAction >= numRandom || lastAction*2 >= numRandom;
-    if(lastAction >= numRandom){
-        movement();
-        this->attack(boxeador);
-        clock1.restart();
-        std::cout << lastAction <<std::endl;
-        numRandom = random(frecuenciaMin,frecuenciaMax);
-        this->changeStates(0,true);
-        this->changeStates(1,false);
-    }else if (lastAction*2 >= numRandom){
-        this->changeStates(1, true);
-        this->changeStates(1,false);
+    return ;
     }
 
 
