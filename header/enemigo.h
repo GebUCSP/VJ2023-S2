@@ -10,7 +10,6 @@
 
 class Enemigo: public Boxeador{
 private:
-    sf::Vector2f posInitial;
     int numRandom;
     int frecuenciaMin, frecuenciaMax;
 public:
@@ -21,7 +20,7 @@ public:
 
     int random(int a, int b);
     std::string randomDirection();
-    void move(std::string);
+    void movement() override;
 
 
 };

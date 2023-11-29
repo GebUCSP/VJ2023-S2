@@ -17,7 +17,7 @@ public:
     void inputs(sf::Keyboard::Key, bool) override;
     void timer(Boxeador*) override;
 
-    void move(std::string);
+    void movement() override;
 
 };
 

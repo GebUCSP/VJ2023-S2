@@ -22,6 +22,11 @@ private:
     Boxeador* player;
     Boxeador* enemigo;
 
+    sf::Texture background;
+    sf::Sprite s_background;
+
+    sf::Texture cuerdas;
+    sf::Sprite s_cuerdas;
 
 
 

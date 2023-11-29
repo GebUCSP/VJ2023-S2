@@ -2,31 +2,44 @@
 
 
 Enemigo::Enemigo(std::string _nombre, int _vida, int _energia, int _dmg, int _frecuenciaMin, int _frecuenciaMax): Boxeador(_nombre,_vida,_energia,_dmg){
+    //////////////////////////////
+    if(!texture.loadFromFile("resource/e_img(1).png")){
+        std::cout << "error cargar" << std::endl;
+    }
+    if(!texture1.loadFromFile("resource/e_img(2).png")){
+        std::cout << "error fatal" << std::endl;
+    }
+    if(!texture2.loadFromFile("resource/e_img(3).png")){
+        std::cout << "error fatal" << std::endl;
+    }
+
+    /////////////////////////
+
     numRandom = static_cast<int>(random(frecuenciaMin, frecuenciaMax));
     frecuenciaMin =_frecuenciaMin;
     frecuenciaMax = _frecuenciaMax;
 
-    if(!texture.loadFromFile("resource/menu.jpg",sf::IntRect(20,20,20,20))){
-        std::cout << "error cargar" << std::endl;
-    }
+    sprite.setOrigin(sprite.getLocalBounds().width,sprite.getLocalBounds().height);
 
-    posInitial.x = 450.0f;
-    posInitial.y = 100.0f;
+    posInitial.x = 300.0f;
+    posInitial.y = -20.0f;
 
     sprite.setTexture(texture);
-    sprite.setScale(6,6);
+
+    sprite.setTextureRect(sf::IntRect (0,0,256,256));
+    sprite.setScale(1.7,1.7);
     sprite.setPosition(posInitial);
 
-    if (!font.loadFromFile("resource/arial.ttf"))
+    if (!font.loadFromFile("resource/font.ttf"))
     {
         std::cout << "fallo carga fuente enemigo" << std::endl;
     }
     vida_f.setFont(font);
     energia_f.setFont(font);
     nombre_f.setFont(font);
-    vida_f.setPosition(800,10);
-    energia_f.setPosition(800,40);
-    nombre_f.setPosition(700,20);
+    vida_f.setPosition(770,10);
+    energia_f.setPosition(770,40);
+    nombre_f.setPosition(650,20);
 }
 
 void Enemigo::inputs(sf::Keyboard::Key, bool) {
@@ -41,17 +54,22 @@ int Enemigo::random(int a, int b){
 
 void Enemigo::timer(Boxeador* boxeador) {
     lastAction = clock1.getElapsedTime().asSeconds();
-    sprite.setPosition(posInitial); //cambiable
+    sprite.setPosition(posInitial);
+    bool OK = lastAction >= numRandom || lastAction*2 >= numRandom;
     if(lastAction >= numRandom){
-        move(randomDirection()); // cambiable
+        movement();
         this->attack(boxeador);
         clock1.restart();
         std::cout << lastAction <<std::endl;
         numRandom = random(frecuenciaMin,frecuenciaMax);
-        this->changeStates(1, false);
+        this->changeStates(0,true);
+        this->changeStates(1,false);
     }else if (lastAction*2 >= numRandom){
         this->changeStates(1, true);
+        this->changeStates(1,false);
     }
+
+
     std::fill(this->directions.begin(), this->directions.end(), false);
 }
 
@@ -67,14 +85,30 @@ std::string Enemigo::randomDirection() {
     return "none";
 }
 
-void Enemigo::move( std::string dir = "none"){
-    int x;
-    if (dir == "der"){
-        x = 1;
-    }else if(dir == "izq"){
-        x = -1;
+void Enemigo::movement(){
+    dirImg = 0;
+    float x= 1.8f;
+    if (directions[0]){
+        dirImg = 1;
+    }else if(directions[2]){
+        dirImg = -1;
     }else{
-        x = 0;
+        dirImg = 0;
+        x = 2.0f;
     }
-    this->sprite.move(100*x,100);
+
+    if(states[0]){
+        this->sprite.setTexture(texture2);
+        this->sprite.move(50.0f*dirImg,50.0f);
+        this->sprite.setScale(x, x);
+
+    }else if(states[1]){
+        if(directions[0] || directions[2]){
+            this->sprite.move(50.0f*dirImg,50.0f);
+        }
+        this->sprite.setTexture(texture1);
+    }else{
+        this->sprite.setTexture(texture);
+
+    }
 }
