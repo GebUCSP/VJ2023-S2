@@ -3,7 +3,7 @@
 
 Juego::Juego(): mWindow(sf::VideoMode(1000,650),"SFML"), menu(&mWindow){
     player = new Jugador("YO",100,100,10);
-    enemigo = new Enemigo("ARNOLD",100,100,10,1,2);
+    enemigo = new Enemigo("NEYLIZ",100,100,10,1,2);
 
     mWindow.setFramerateLimit(10);
 
@@ -34,7 +34,7 @@ void Juego::run() {
     while (mWindow.isOpen()) {
         eventos();
         if (menu.a_play){
-            enemigo->timer(player);
+            //enemigo->timer(player);
         }
 
         render();
@@ -90,6 +90,10 @@ void Juego::eventos() {
         }
     }
     player->updateIu();
+    enemigo->inputs(evento.key.code,false);
+    if(enemigo->getStates(0)){
+        enemigo->attack(player);
+    }
     enemigo->updateIu();
 
 }

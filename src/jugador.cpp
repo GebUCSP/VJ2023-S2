@@ -13,6 +13,9 @@ Jugador::Jugador(std::string _nombre, int _vida, int _energia, int _dmg): Boxead
     if(!texture2.loadFromFile("resource/p_img(3).png")){
         std::cout << "error fatal" << std::endl;
     }
+    if(!texture3.loadFromFile("resource/p_img(3).png")){
+        std::cout << "error fatal" << std::endl;
+    }
 
 
 

@@ -14,6 +14,7 @@ protected:
     //////////////////
     sf::Texture texture1;
     sf::Texture texture2;
+    sf::Texture texture3;
 
     ///////////////
 

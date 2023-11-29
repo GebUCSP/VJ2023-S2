@@ -12,6 +12,9 @@ Enemigo::Enemigo(std::string _nombre, int _vida, int _energia, int _dmg, int _fr
     if(!texture2.loadFromFile("resource/e_img(3).png")){
         std::cout << "error fatal" << std::endl;
     }
+    if(!texture3.loadFromFile("resource/p_img(3).png")){
+        std::cout << "error fatal" << std::endl;
+    }
 
     /////////////////////////
 
@@ -26,7 +29,7 @@ Enemigo::Enemigo(std::string _nombre, int _vida, int _energia, int _dmg, int _fr
     sprite.setOrigin(sprite.getLocalBounds().width,sprite.getLocalBounds().height);
 
     posInitial.x = 300.0f;
-    posInitial.y = -20.0f;
+    posInitial.y = 0.0f;
 
     sprite.setTexture(texture);
 
@@ -46,9 +49,61 @@ Enemigo::Enemigo(std::string _nombre, int _vida, int _energia, int _dmg, int _fr
     nombre_f.setPosition(650,20);
 }
 
-void Enemigo::inputs(sf::Keyboard::Key, bool) {
-    return;
+void Enemigo::inputs(sf::Keyboard::Key key,bool  isPressed) {
+    std::vector<sf::Keyboard::Key>teclas = {sf::Keyboard::A,sf::Keyboard::D,sf::Keyboard::J,sf::Keyboard::K};
+    isPressed = random(0,2);
+    key = teclas[random(0,2)];
+    lastAction = clock1.getElapsedTime().asSeconds();
+    if(isPressed && lastAction >= numRandom){
+        switch (key) {
+            case sf::Keyboard::A:
+                changeDirections(0, isPressed);
+                break;
+            case sf::Keyboard::W:
+                changeDirections(1, isPressed);
+                break;
+            case sf::Keyboard::D:
+                changeDirections(2, isPressed);
+                break;
+            case sf::Keyboard::S:
+                changeDirections(3, isPressed);
+                break;
+            default:
+                break;
+        }
+
+        switch (key) {
+            case sf::Keyboard::J:
+                changeStates(0, isPressed);
+                break;
+            case sf::Keyboard::K:
+                changeStates(1, isPressed);
+                break;
+            case sf::Keyboard::L:
+                changeStates(2, isPressed);
+                break;
+            default:
+                break;
+        }
+        clock1.restart();
+    }
+    if(!isPressed){
+        std::fill(directions.begin(), directions.end(),false);
+        std::fill(states.begin(), states.end(),false);
+    }
+
+    this->sprite.setPosition(posInitial);
+    this->sprite.setScale(1.7f,1.7f);
+    this->sprite.setTexture(texture);
+
+    if(states[0] || states[1]){
+        movement();
+    }
+
+    numRandom = random(frecuenciaMin,frecuenciaMax);
 }
+
+
 
 int Enemigo::random(int a, int b){
     std::default_random_engine generator(std::chrono::system_clock::now().time_since_epoch().count());
@@ -57,24 +112,7 @@ int Enemigo::random(int a, int b){
 }
 
 void Enemigo::timer(Boxeador* boxeador) {
-    lastAction = clock1.getElapsedTime().asSeconds();
-    sprite.setPosition(posInitial);
-    bool OK = lastAction >= numRandom || lastAction*2 >= numRandom;
-    if(lastAction >= numRandom){
-        movement();
-        this->attack(boxeador);
-        clock1.restart();
-        std::cout << lastAction <<std::endl;
-        numRandom = random(frecuenciaMin,frecuenciaMax);
-        this->changeStates(0,true);
-        this->changeStates(1,false);
-    }else if (lastAction*2 >= numRandom){
-        this->changeStates(1, true);
-        this->changeStates(1,false);
-    }
-
-
-    std::fill(this->directions.begin(), this->directions.end(), false);
+    return;
 }
 
 std::string Enemigo::randomDirection() {
@@ -116,3 +154,4 @@ void Enemigo::movement(){
 
     }
 }
+
