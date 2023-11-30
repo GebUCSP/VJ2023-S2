@@ -2,49 +2,12 @@
 
 #include <iostream>
 
-Jugador::Jugador(std::string _nombre, int _vida, int _energia, int _dmg): Boxeador(_nombre,_vida,_energia,_dmg) {
-    //////////////////////////////
-    if(!texture.loadFromFile("../../resource/p_img(1).png")){
-        std::cout << "error cargar" << std::endl;
-    }
-    if(!texture1.loadFromFile("../../resource/p_img(2).png")){
-        std::cout << "error fatal" << std::endl;
-    }
-    if(!texture2.loadFromFile("../../resource/p_img(3).png")){
-        std::cout << "error fatal" << std::endl;
-    }
-    if(!texture3.loadFromFile("../../resource/p_img(3).png")){
-        std::cout << "error fatal" << std::endl;
-    }
-
-
-
-    /////////////////////////
+Jugador::Jugador(std::string _nombre, int _vida, int _energia, int _dmg, bool npc): Boxeador(_nombre,_vida,_energia,_dmg,npc) {
 
     posInitial.x = 675.0f;
     posInitial.y = 600.0f;
 
-    texture.setSmooth(true);
-    texture1.setSmooth(true);
-    texture2.setSmooth(true);
-
-    sprite.setTexture(texture);
-    sprite.setOrigin(sprite.getLocalBounds().width,sprite.getLocalBounds().height);
-
-
-    sprite.setTextureRect(sf::IntRect (0,0,256,256));
-    sprite.setScale(1.7,1.7);
     sprite.setPosition(posInitial);
-
-
-    if (!font.loadFromFile("../../resource/font.ttf"))
-    {
-        std::cout << "fallo carga fuente" << std::endl;
-    }
-
-    vida_f.setFont(font);
-    energia_f.setFont(font);
-    nombre_f.setFont(font);
     vida_f.setPosition(10,570);
     energia_f.setPosition(10,600);
     nombre_f.setPosition(50,535);
@@ -82,9 +45,6 @@ void Jugador::inputs(sf::Keyboard::Key key, bool isPressed) {
             case sf::Keyboard::K:
                 changeStates(1, isPressed);
                 break;
-            case sf::Keyboard::L:
-                changeStates(2, isPressed);
-                break;
             default:
                 break;
         }
@@ -96,19 +56,13 @@ void Jugador::inputs(sf::Keyboard::Key key, bool isPressed) {
 
     this->sprite.setPosition(posInitial);
     this->sprite.setScale(1.7f,1.7f);
-    this->sprite.setTexture(texture);
+    this->sprite.setTexture(textures[0]);
 
     if(states[0] || states[1]){
         movement();
     }
 
 }
-
-
-void Jugador::timer(Boxeador* enemigo){
-    return;
-}
-
 
 void Jugador::movement( ){
     dirImg = 0;
@@ -123,7 +77,7 @@ void Jugador::movement( ){
     }
 
     if(states[0]){
-        this->sprite.setTexture(texture2);
+        this->sprite.setTexture(textures[2]);
         this->sprite.move(-100.0f * dirImg, -100.0f);
         this->sprite.setScale(x, x);
 
@@ -131,9 +85,9 @@ void Jugador::movement( ){
         if(directions[0] || directions[2]){
             this->sprite.move(-50.0f * dirImg, -80.0f);
         }
-        this->sprite.setTexture(texture1);
+        this->sprite.setTexture(textures[1]);
     }else{
-        this->sprite.setTexture(texture);
+        this->sprite.setTexture(textures[0]);
 
     }
 

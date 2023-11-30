@@ -12,10 +12,9 @@ private:
 
 public:
 
-    Jugador(std::string _nombre, int _vida, int _energia, int _dmg);
+    Jugador(std::string, int , int, int, bool);
 
     void inputs(sf::Keyboard::Key, bool) override;
-    void timer(Boxeador*) override;
 
     void movement() override;
 

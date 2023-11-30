@@ -16,6 +16,9 @@ protected:
     sf::Texture texture2;
     sf::Texture texture3;
 
+    std::vector<sf::Texture> textures;
+
+
     ///////////////
 
     std::string nombre;
@@ -37,44 +40,32 @@ protected:
 
 
 public:
-    Boxeador(std::string ,int, int, int);
+    Boxeador(std::string ,int, int, int, bool);
 
     ~Boxeador();
 
 
     virtual void inputs(sf::Keyboard::Key, bool) = 0;
-    virtual void timer(Boxeador*)=0;
 
     void updateIu();
     void iu(sf::RenderWindow* );
 
-    void attack(Boxeador*);
     virtual void movement() = 0;
+    void attack(Boxeador*);
 
     void changeStates(int, bool);
     void changeDirections(int, bool);
 
-    std::string getNombre();
     sf::Sprite getSprite();
     sf::Texture getTexture();
-    int getVida();
-    int getEnergia();
-    int getDmg();
-    bool getStates(int);
-    bool getDirections(int);
+    int getVida() const;
+    int getEnergia() const;
+    int getDmg() const;
+    bool getStates(int) const;
+    bool getDirections(int) const;
 
-
-    void returnBase();
-
-
-    void setPos();
-    void setNombre(std::string);
     void setVida(int);
     void setEnergia(int);
-    void setDmg(int);
-
-    //BORRAR
-    void print();
 
 };
 

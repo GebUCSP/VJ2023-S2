@@ -38,7 +38,6 @@ public:
     void render();
     void eventos();
 
-    void datos();
 };
 
 
