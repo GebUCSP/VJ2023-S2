@@ -13,10 +13,6 @@ Boxeador::~Boxeador()=default;
 
 //FUNCIONES
 
-void Boxeador::drawMe(void) {
-    return;
-}
-
 //FUNCIONES SET
 
 void Boxeador::setNombre(std::string _nombre) {
@@ -35,6 +31,11 @@ void Boxeador::setDmg(int _dmg){
     this->dmg = _dmg;
 }
 
+void Boxeador::setPos(){
+    sprite.setPosition(posInitial);
+}
+
+
 void Boxeador::changeStates(int index, bool boolean) {
     states[index] = boolean;
 }
@@ -49,6 +50,14 @@ std::string Boxeador::getNombre(){
     return nombre;
 }
 
+sf::Sprite Boxeador::getSprite(){
+    return this->sprite;
+}
+
+sf::Texture Boxeador::getTexture() {
+    return this->texture;
+}
+
 int Boxeador::getVida() {
     return vida;
 }
@@ -60,6 +69,7 @@ int Boxeador::getEnergia() {
 int Boxeador::getDmg() {
     return dmg;
 }
+
 
 bool Boxeador::getStates(int index) {
     return states[index];
@@ -85,9 +95,36 @@ void Boxeador::print() {
 }
 
 void Boxeador::attack(Boxeador* objetivo) {
-    if(!objetivo->getStates(1) && !objetivo->getStates(2)){
+    this->changeStates(0,true);
+    if(objetivo->getStates(0) && this->getStates(0)){
+        objetivo->setVida(objetivo->getVida()-10);
+        this->setVida(this->getVida()-10);
+    }else if(!objetivo->getStates(1)){
         objetivo->setVida(objetivo->getVida()-this->getDmg());
-    }else if(objetivo->getStates(2) || objetivo->getStates(1)){
+    }else if(objetivo->getStates(1) && this->directions == objetivo->directions){
+        objetivo->setEnergia(objetivo->getEnergia()-10);
+    }else if(objetivo->getStates(1)){
         objetivo->setEnergia(objetivo->getEnergia()-20);
     }
+    this->changeStates(0,false);
+}
+
+void Boxeador::updateIu() {
+    vida_f.setString("VIDA: " + std::to_string(this->vida));
+    energia_f.setString("ENERGIA: " + std::to_string(this->energia));
+    nombre_f.setString(this->nombre);
+
+}
+
+void Boxeador::iu(sf::RenderWindow* window){
+    window->draw(vida_f);
+    window->draw(energia_f);
+    window->draw(nombre_f);
+}
+
+
+
+void Boxeador::returnBase(){
+    this->sprite.setPosition(posInitial);
+    //this->sprite.scale(1.7,1.7);
 }

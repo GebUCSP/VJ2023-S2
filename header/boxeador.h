@@ -8,30 +8,55 @@
 
 class Boxeador{
 protected:
+    sf::Texture texture;
+    sf::Sprite sprite;
+
+    //////////////////
+    sf::Texture texture1;
+    sf::Texture texture2;
+    sf::Texture texture3;
+
+    ///////////////
+
     std::string nombre;
     int vida, energia, dmg, lastAction;
-    //attack, block, dodge
-    std::vector<bool>states = {false,false,false};
+    float dirImg;
+    //attack, block
+    std::vector<bool>states = {false,false};
     //up, der, back, izq
     std::vector<bool>directions = {false,false, false,false};
     //reloj propio
     sf::Clock clock1;
+
+    sf::Font font;
+    sf::Text nombre_f;
+    sf::Text vida_f;
+    sf::Text energia_f;
+
+    sf::Vector2f posInitial;
+
 
 public:
     Boxeador(std::string ,int, int, int);
 
     ~Boxeador();
 
-    virtual void drawMe() = 0;
+
     virtual void inputs(sf::Keyboard::Key, bool) = 0;
     virtual void timer(Boxeador*)=0;
 
-     void attack(Boxeador*);
+    void updateIu();
+    void iu(sf::RenderWindow* );
+
+    void attack(Boxeador*);
+    virtual void movement() = 0;
 
     void changeStates(int, bool);
     void changeDirections(int, bool);
 
     std::string getNombre();
+    sf::Sprite getSprite();
+    sf::Texture getTexture();
     int getVida();
     int getEnergia();
     int getDmg();
@@ -39,6 +64,10 @@ public:
     bool getDirections(int);
 
 
+    void returnBase();
+
+
+    void setPos();
     void setNombre(std::string);
     void setVida(int);
     void setEnergia(int);

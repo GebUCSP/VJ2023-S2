@@ -19,7 +19,8 @@ add_executable(CMakeSFMLProject src/main.cpp
         header/enemigo.h
         src/enemigo.cpp
         src/menu.cpp
-        header/menu.h)
+        header/menu.h
+)
 target_link_libraries(CMakeSFMLProject PRIVATE sfml-graphics)
 target_compile_features(CMakeSFMLProject PRIVATE cxx_std_17)
 

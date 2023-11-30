@@ -11,14 +11,16 @@
 class Enemigo: public Boxeador{
 private:
     int numRandom;
+    int frecuenciaMin, frecuenciaMax;
 public:
-    Enemigo(std::string, int, int, int);
+    Enemigo(std::string, int, int, int, int,int);
 
-    void drawMe() override;
     void inputs(sf::Keyboard::Key, bool) override;
     void timer(Boxeador*) override;
 
-    int random();
+    int random(int a, int b);
+    std::string randomDirection();
+    void movement() override;
 
 
 };

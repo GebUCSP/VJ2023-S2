@@ -2,8 +2,28 @@
 #include "../header/jugador.h"
 
 Juego::Juego(): mWindow(sf::VideoMode(1000,650),"SFML"), menu(&mWindow){
-    player = new Jugador("string",100,100,10);
-    enemigo = new Enemigo("string",100,100,10);
+    player = new Jugador("YO",100,100,10);
+    enemigo = new Enemigo("NEYLIZ",100,100,10,1,2);
+
+    mWindow.setFramerateLimit(10);
+
+    if(!background.loadFromFile("../../resource/fondoo.png")){
+        std::cerr << "Error al cargar texturas";
+    }
+    if(!cuerdas.loadFromFile("../../resource/cuerdas.png")){
+        std::cerr << "Error al cargar texturas";
+    }
+    s_background.setTexture(background);
+    s_cuerdas.setTexture(cuerdas);
+
+    //Set del fondo
+    sf::Vector2u sizeW = mWindow.getSize();
+    s_background.setScale(static_cast<float> (sizeW.x) / s_background.getLocalBounds().width, static_cast<float> (sizeW.y) / s_background.getLocalBounds().height);
+   // s_background.scale(sf::Vector2f(0,0));
+    s_cuerdas.setScale(650, static_cast<float> (sizeW.y) / background.getSize().y);
+
+    s_cuerdas.setPosition(0,250);
+
 }
 
 Juego::~Juego(){
@@ -14,24 +34,34 @@ Juego::~Juego(){
 void Juego::run() {
     while (mWindow.isOpen()) {
         eventos();
-        enemigo->timer(player);
+        if (menu.a_play){
+            //enemigo->timer(player);
+        }
+
         render();
-        if (!menu.a_play && !menu.a_options){
+        if (!menu.a_play && !menu.a_exit){
             menu.checkMouseClick1();
         }
 
-        if (menu.a_options){
-            menu.checkMouseClick2();
-            if (menu.a_back){
-                menu.a_options = false;
-            }
+        if (menu.a_exit){
+            mWindow.close();
         }
     }
 }
 
 void Juego::render() {
     mWindow.clear();
-    menu.dibujarFondo();
+    if(!menu.getDelete()){
+        menu.dibujarFondo();
+    }else{
+        mWindow.draw(s_background);
+        mWindow.draw(enemigo->getSprite());
+        mWindow.draw(player->getSprite());
+        mWindow.draw(s_cuerdas);
+        player->iu(&mWindow);
+        enemigo->iu(&mWindow);
+
+    }
     mWindow.display();
 }
 
@@ -41,6 +71,9 @@ void Juego::eventos() {
         switch (evento.type) {
             case sf::Event::KeyPressed:
                 player->inputs(evento.key.code, true);
+                if(player->getStates(0)){
+                    player->attack(enemigo);
+                }
                 player->print();
                 datos();
                 break;
@@ -54,7 +87,15 @@ void Juego::eventos() {
                 break;
         }
     }
+    player->updateIu();
+    enemigo->inputs(evento.key.code,false);
+    if(enemigo->getStates(0)){
+        enemigo->attack(player);
+    }
+    enemigo->updateIu();
+
 }
+
 
 void Juego::datos() {
     std::cout << player->getVida() << std::endl;

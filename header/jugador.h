@@ -6,14 +6,18 @@
 #include "boxeador.h"
 
 class Jugador: public Boxeador{
+private:
+    sf::Vector2f posInitial;
+
+
 public:
 
     Jugador(std::string _nombre, int _vida, int _energia, int _dmg);
 
-    void drawMe() override;
     void inputs(sf::Keyboard::Key, bool) override;
     void timer(Boxeador*) override;
 
+    void movement() override;
 
 };
 
