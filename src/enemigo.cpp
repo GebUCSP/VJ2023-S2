@@ -49,8 +49,58 @@ Enemigo::Enemigo(std::string _nombre, int _vida, int _energia, int _dmg, int _fr
     nombre_f.setPosition(650,20);
 }
 
-void Enemigo::inputs(sf::Keyboard::Key, bool) {
-    return;
+void Enemigo::inputs(sf::Keyboard::Key key, bool isPressed) {
+    std::vector<sf::Keyboard::Key>teclas = {sf::Keyboard::A,sf::Keyboard::D,sf::Keyboard::J,sf::Keyboard::K};
+    isPressed = random(0,2);
+    key = teclas[random(0,2)];
+    lastAction = clock1.getElapsedTime().asSeconds();
+    if(isPressed && lastAction >= numRandom){
+        switch (key) {
+            case sf::Keyboard::A:
+                changeDirections(0, isPressed);
+                break;
+            case sf::Keyboard::W:
+                changeDirections(1, isPressed);
+                break;
+            case sf::Keyboard::D:
+                changeDirections(2, isPressed);
+                break;
+            case sf::Keyboard::S:
+                changeDirections(3, isPressed);
+                break;
+            default:
+                break;
+        }
+
+        switch (key) {
+            case sf::Keyboard::J:
+                changeStates(0, isPressed);
+                break;
+            case sf::Keyboard::K:
+                changeStates(1, isPressed);
+                break;
+            case sf::Keyboard::L:
+                changeStates(2, isPressed);
+                break;
+            default:
+                break;
+        }
+        clock1.restart();
+    }
+    if(!isPressed){
+        std::fill(directions.begin(), directions.end(),false);
+        std::fill(states.begin(), states.end(),false);
+    }
+
+    this->sprite.setPosition(posInitial);
+    this->sprite.setScale(1.7f,1.7f);
+    this->sprite.setTexture(texture);
+
+    if(states[0] || states[1]){
+        movement();
+    }
+
+    numRandom = random(frecuenciaMin,frecuenciaMax);
 }
 
 int Enemigo::random(int a, int b){
@@ -61,7 +111,7 @@ int Enemigo::random(int a, int b){
 
 void Enemigo::timer(Boxeador* boxeador) {
     return ;
-    }
+}
     
 std::string Enemigo::randomDirection() {
     int randomNum = random(0,2);
