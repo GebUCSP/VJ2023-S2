@@ -4,7 +4,7 @@ Juego::Juego(): mWindow(sf::VideoMode(1000,650),"SFML"), menu(&mWindow){
     mWindow.setFramerateLimit(10);
 
     player = new Jugador("YO",100,100,10,false);
-    enemigo = new Enemigo("NEYLIZ",100,100,10,2,4,true);
+    enemigo = new Enemigo("NEYLIZ",100,100,10,3,5,true);
 
 
     if(!background.loadFromFile("../../resource/fondoo.png")){
@@ -13,6 +13,14 @@ Juego::Juego(): mWindow(sf::VideoMode(1000,650),"SFML"), menu(&mWindow){
     if(!cuerdas.loadFromFile("../../resource/cuerdas.png")){
         std::cerr << "Error al cargar texturas";
     }
+
+    if(!over.loadFromFile("../../resource/over.png")){
+        std::cerr << "Error al cargar texturas";
+    }
+    if(!win.loadFromFile("../../resource/win.png")){
+        std::cerr << "Error al cargar texturas";
+    }
+
 
 
     sf::Vector2u sizeW = mWindow.getSize();
@@ -23,6 +31,12 @@ Juego::Juego(): mWindow(sf::VideoMode(1000,650),"SFML"), menu(&mWindow){
     s_cuerdas.setTexture(cuerdas);
     s_cuerdas.setScale(650, static_cast<float> (sizeW.y) / background.getSize().y);
     s_cuerdas.setPosition(0,250);
+
+    s_win.setTexture(win);
+    s_win.scale(1.6f,1.6f);
+
+    s_gameOver.setTexture(over);
+    s_gameOver.scale(3.6f,4.0f);
 
 }
 
@@ -43,6 +57,7 @@ void Juego::run() {
         if (menu.a_exit){
             mWindow.close();
         }
+
     }
 }
 
@@ -59,6 +74,13 @@ void Juego::render() {
         player->iu(&mWindow);
         enemigo->iu(&mWindow);
     }
+
+    if(player->getVida() <= 0){
+        mWindow.draw(s_gameOver);
+    }else if (enemigo->getVida() <= 0){
+        mWindow.draw(s_win);
+    }
+
 
     mWindow.display();
 }

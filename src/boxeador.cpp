@@ -93,6 +93,8 @@ void Boxeador::attack(Boxeador* objetivo) {
         this->setVida(this->getVida()-10);
     }else if(!objetivo->getStates(1)){
         objetivo->setVida(objetivo->getVida()-this->getDmg());
+    }else if(objetivo->getStates(1) && objetivo->getEnergia() <= 0){
+        objetivo->setVida(objetivo->getVida()-10);
     }else if(objetivo->getStates(1) && this->directions == objetivo->directions){
         objetivo->setEnergia(objetivo->getEnergia()-10);
     }else if(objetivo->getStates(1)){

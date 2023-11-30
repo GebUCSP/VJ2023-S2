@@ -28,6 +28,12 @@ private:
     sf::Texture cuerdas;
     sf::Sprite s_cuerdas;
 
+    sf::Texture win;
+    sf::Sprite s_win;
+
+    sf::Texture over;
+    sf::Sprite s_gameOver;
+
 
 
 public:
