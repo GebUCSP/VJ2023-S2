@@ -10,16 +10,9 @@ class Boxeador{
 protected:
     sf::Texture texture;
     sf::Sprite sprite;
-
-    //////////////////
-    sf::Texture texture1;
-    sf::Texture texture2;
-    sf::Texture texture3;
+    
 
     std::vector<sf::Texture> textures;
-
-
-    ///////////////
 
     std::string nombre;
     int vida, energia, dmg, lastAction;
